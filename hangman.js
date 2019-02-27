@@ -1,3 +1,6 @@
+
+
+
 //1. Setup a new status for peoperty with initial value of playing
 //Create a new method for recalculating status to "playing", "finished", or "failed"
 // call that method after a guess is processed
@@ -13,6 +16,8 @@ const Hangman = function (word, remaningGueses) {
     this.guessedWords = []
     this.status = 'Playing'
 }
+
+const lol = this.status
 
 Hangman.prototype.getPuzzle = function () {
     let asterixWord = ''
@@ -33,30 +38,55 @@ Hangman.prototype.getPuzzle = function () {
 
 
 Hangman.prototype.makeGuess = function (letter) {
+    
     letter = letter.toLowerCase()
     const isUnqiue = !this.guessedWords.includes(letter)
     const badGuess = !this.word.includes(letter)
-
+    if(this.status!=='Playing') {
+        return
+    } 
     if (isUnqiue) {
         this.guessedWords.push(letter)
-        console.log('Not In Guessed Letter, and in word', letter)
     } if (isUnqiue && badGuess) {
-        console.log('bad guess', letter)
         this.remaningGueses--
     }
+
+    guessedLetterOne.gameStatus()
+
+
 }
 
+
 Hangman.prototype.gameStatus = function () {
+    /*const finished = this.word.every((letter) => {
+        varje letter måste passa funktionen för att det ska funka
+        return this.guessedLetters.includes(letter)
+    })*/
+
     if (!guessedLetterOne.getPuzzle().includes('*') && this.remaningGueses>0) {
         this.status = 'Finished'
 
-    }else if(this.remaningGueses === 0) {
+    }else if(this.remaningGueses <= 0) {
         this.status = 'Failed'
     }
+
     console.log(this.status)
 
-    
 }
+
+Hangman.prototype.statusMessage = function () {
+    if(this.status === 'Playing') {
+        return `You have ${this.remaningGueses} guesses left`
+
+    } else if(this.status === 'Failed') {
+        return `Nice Try! The word was ${this.word.join('')}`
+
+    } else if (this.status ==='Finished') {
+        return `Great work you guessed the word`
+    }
+
+}
+
 
 
 
