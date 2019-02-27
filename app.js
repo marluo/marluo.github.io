@@ -9,6 +9,42 @@
 
 
 
+let hangmanWord = document.querySelector("#puzzleText")
+let guessesLeft = document.querySelector('#guessesLeft')
+const guessedLetterOne = new Hangman('Cat', 2)
+hangmanWord.textContent = guessedLetterOne.getPuzzle()
+guessesLeft.textContent = `You have ${guessedLetterOne.remaningGueses} guesses left`
+
+
+window.addEventListener('keypress', function (e) {
+    const keypress = String.fromCharCode(e.charCode)
+    guessedLetterOne.makeGuess(keypress)
+    guessedLetterOne.gameStatus()
+    hangmanWord.textContent = guessedLetterOne.getPuzzle()
+    guessesLeft.textContent = `You have ${guessedLetterOne.remaningGueses} guesses left`
+    console.log(guessedLetterOne.getPuzzle())
+    console.log(guessedLetterOne.remaningGueses)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*const team = ['Luke', 'Madison']
 //const array = new Array(['Luke', 'Madison'])
@@ -16,13 +52,13 @@ console.log(team.hasOwnProperty('length'))*/
 
 
 /*const getScore = () => 1
-console.log(getScore)*/
+console.log(getScore)
 
 const product = 'Computer' //gets converted to a object if u use an method on it. Is an object wrapper
 console.log(product.split(''))
 
 const otherProduct = new String('Phone') //converts it to an object, and calls the method on it.
-console.log(otherProduct)
+console.log(otherProduct)*/
 
 
 

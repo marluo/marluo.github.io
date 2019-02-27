@@ -1,7 +1,9 @@
-//Create a method for making a guess
-//1. Should accept a character for guessing
-//2 Should add unique guesses to list of guesses
-//3. should decrement the guesses left if a unique guess isnt a amtch
+//1. Setup a new status for peoperty with initial value of playing
+//Create a new method for recalculating status to "playing", "finished", or "failed"
+// call that method after a guess is processed
+// use console log to print the status
+
+
 
 
 
@@ -9,6 +11,7 @@ const Hangman = function (word, remaningGueses) {
     this.word = word.toLowerCase().split('')
     this.remaningGueses = remaningGueses
     this.guessedWords = []
+    this.status = 'Playing'
 }
 
 Hangman.prototype.getPuzzle = function () {
@@ -43,14 +46,22 @@ Hangman.prototype.makeGuess = function (letter) {
     }
 }
 
+Hangman.prototype.gameStatus = function () {
+    if (!guessedLetterOne.getPuzzle().includes('*') && this.remaningGueses>0) {
+        this.status = 'Finished'
+
+    }else if(this.remaningGueses === 0) {
+        this.status = 'Failed'
+    }
+    console.log(this.status)
+
+    
+}
 
 
-const guessedLetterOne = new Hangman('Cat', 2)
 
-window.addEventListener('keypress', function (e) {
-    const keypress = String.fromCharCode(e.charCode)
-    guessedLetterOne.makeGuess(keypress)
-    console.log(guessedLetterOne.getPuzzle())
-    console.log(guessedLetterOne.remaningGueses)
-})
+
+
+
+
 
