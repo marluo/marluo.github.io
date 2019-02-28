@@ -6,86 +6,83 @@
 // call that method after a guess is processed
 // use console log to print the status
 
+class Hangman {
+    constructor(word, remaningGueses) {
+        this.word = word.toLowerCase().split('')
+        this.remaningGueses = remaningGueses
+        this.guessedWords = []
+        this.status = 'Playing'
 
-
-
-
-const Hangman = function (word, remaningGueses) {
-    this.word = word.toLowerCase().split('')
-    this.remaningGueses = remaningGueses
-    this.guessedWords = []
-    this.status = 'Playing'
-}
-
-const lol = this.status
-
-Hangman.prototype.getPuzzle = function () {
-    let asterixWord = ''
-    //deklaerar asterixword så att den går att fåm tag i hela funktionen
-    this.word.forEach((letter) => {
-        //forEachar varje "bokstav" i arrayen eftersom den är splittad.
-        if(this.guessedWords.includes(letter) || letter === ' ') {
-            //Om guessedLetters har bokstaven som foreachas i word(varje index är letter)... gör något [HAR DEN A? GÖR NÅGOT, HAR DEN B? GÖR NÅGOT]
-            asterixWord = asterixWord+letter
-        }
-        else {
-            asterixWord = asterixWord + '*'
-        }
-
-    })
-    return asterixWord
-}
-
-
-Hangman.prototype.makeGuess = function (letter) {
-    
-    letter = letter.toLowerCase()
-    const isUnqiue = !this.guessedWords.includes(letter)
-    const badGuess = !this.word.includes(letter)
-    if(this.status!=='Playing') {
-        return
-    } 
-    if (isUnqiue) {
-        this.guessedWords.push(letter)
-    } if (isUnqiue && badGuess) {
-        this.remaningGueses--
     }
+    getPuzzle() {
+        let asterixWord = ''
+        //deklaerar asterixword så att den går att fåm tag i hela funktionen
+        this.word.forEach((letter) => {
+            //forEachar varje "bokstav" i arrayen eftersom den är splittad.
+            if (this.guessedWords.includes(letter) || letter === ' ') {
+                //Om guessedLetters har bokstaven som foreachas i word(varje index är letter)... gör något [HAR DEN A? GÖR NÅGOT, HAR DEN B? GÖR NÅGOT]
+                asterixWord = asterixWord + letter
+            }
+            else {
+                asterixWord = asterixWord + '*'
+            }
 
-    guessedLetterOne.gameStatus()
+        })
+        return asterixWord
+    }
+    makeGuess(letter) {
+
+        letter = letter.toLowerCase()
+        const isUnqiue = !this.guessedWords.includes(letter)
+        const badGuess = !this.word.includes(letter)
+        if (this.status !== 'Playing') {
+            return
+        }
+        if (isUnqiue) {
+            this.guessedWords.push(letter)
+        } if (isUnqiue && badGuess) {
+            this.remaningGueses--
+        }
+
+        guessedLetterOne.gameStatus()
 
 
-}
-
-
-Hangman.prototype.gameStatus = function () {
-    /*const finished = this.word.every((letter) => {
+    }
+    gameStatus() {
+        /*const finished = this.word.every((letter) => {
         varje letter måste passa funktionen för att det ska funka
         return this.guessedLetters.includes(letter)
     })*/
 
-    if (!guessedLetterOne.getPuzzle().includes('*') && this.remaningGueses>0) {
-        this.status = 'Finished'
+        if (!guessedLetterOne.getPuzzle().includes('*') && this.remaningGueses > 0) {
+            this.status = 'Finished'
 
-    }else if(this.remaningGueses <= 0) {
-        this.status = 'Failed'
+        } else if (this.remaningGueses <= 0) {
+            this.status = 'Failed'
+        }
+
+        console.log(this.status)
+        
+        
+
+    } statusMessage() {
+        if (this.status === 'Playing') {
+            return `You have ${this.remaningGueses} guesses left`
+
+        } else if (this.status === 'Failed') {
+            return `Nice Try! The word was ${this.word.join('')}`
+
+        } else if (this.status === 'Finished') {
+            return `Great work you guessed the word`
+        }
+
     }
-
-    console.log(this.status)
 
 }
 
-Hangman.prototype.statusMessage = function () {
-    if(this.status === 'Playing') {
-        return `You have ${this.remaningGueses} guesses left`
 
-    } else if(this.status === 'Failed') {
-        return `Nice Try! The word was ${this.word.join('')}`
 
-    } else if (this.status ==='Finished') {
-        return `Great work you guessed the word`
-    }
 
-}
 
 
 
