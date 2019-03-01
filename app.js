@@ -6,7 +6,9 @@
 //String: MyString --> String.prototype --> Object.prototype -- > null.
 //number: myNumber --> number.prototype --> Object.prototype --> null.
 //Boolean: MyBoolean --> boolean.prototype --> Object.prototype --> null.
-
+//HTTP (Hypertext Transfer Protocol)
+// Request - what do we want to do ((when u enter a page, http request))
+//Response - what was actually done
 
 
 let hangmanWord = document.querySelector("#puzzleText")
@@ -16,8 +18,7 @@ hangmanWord.textContent = guessedLetterOne.puzzle
 guessesLeft.textContent = guessedLetterOne.statusMessage
 
 
-window.addEventListener('keypress', function (e) {
-
+window.addEventListener('keypress', (e) => {
     const keypress = String.fromCharCode(e.charCode)
     guessedLetterOne.makeGuess(keypress)
     guessedLetterOne.statusMessage
@@ -25,8 +26,48 @@ window.addEventListener('keypress', function (e) {
     guessesLeft.textContent = guessedLetterOne.statusMessage
 })
 
+getPuzzle((error, puzzlex)=> {
+    if (error) {
+        console.log(`Error:${error}`)
+    } else {
+        console.log(puzzlex)
+    }
+})
+//vi skickar in en ett argument som printar det argumentet som vi passar in
+
+//Making an HTTP request
+/**/
 
 
+
+/*const requestCountries = new XMLHttpRequest()
+const countryCode = 'SE'
+
+
+requestCountries.addEventListener('readystatechange', (e) => {
+    if (e.target.readyState === 4 && e.target.status===200) {
+        const countries = JSON.parse(e.target.responseText)
+        const country = countries.findIndex((countryIndex) => {
+            return countryIndex.alpha2Code === countryCode
+
+
+        })
+        console.log(countries[country].name)
+    } else if(e.target.readyState===4) {
+        console.log('Unable to fetch data')
+
+    }
+
+
+})
+
+
+requestCountries.open('GET', 'http://restcountries.eu/rest/v2/all')
+requestCountries.send()
+
+
+httpRequest.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
+httpRequest.send()
 
 
 

@@ -54,7 +54,7 @@ class Hangman {
         return this.guessedLetters.includes(letter)
     })*/
 
-        if (!guessedLetterOne.puzzle.includes('*') && this.remaningGueses > 0) {
+        if (!guessedLetterOne.puzzle().includes('*') && this.remaningGueses > 0) {
             this.status = 'Finished'
 
         } else if (this.remaningGueses <= 0) {
