@@ -14,7 +14,7 @@ class Hangman {
         this.status = 'Playing'
 
     }
-    getPuzzle() {
+    get puzzle() {
         let asterixWord = ''
         //deklaerar asterixword så att den går att fåm tag i hela funktionen
         this.word.forEach((letter) => {
@@ -54,7 +54,7 @@ class Hangman {
         return this.guessedLetters.includes(letter)
     })*/
 
-        if (!guessedLetterOne.getPuzzle().includes('*') && this.remaningGueses > 0) {
+        if (!guessedLetterOne.puzzle.includes('*') && this.remaningGueses > 0) {
             this.status = 'Finished'
 
         } else if (this.remaningGueses <= 0) {
@@ -65,7 +65,7 @@ class Hangman {
         
         
 
-    } statusMessage() {
+    }get statusMessage() {
         if (this.status === 'Playing') {
             return `You have ${this.remaningGueses} guesses left`
 

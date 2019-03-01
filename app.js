@@ -12,19 +12,17 @@
 let hangmanWord = document.querySelector("#puzzleText")
 let guessesLeft = document.querySelector('#guessesLeft')
 const guessedLetterOne = new Hangman('Cat', 2)
-hangmanWord.textContent = guessedLetterOne.getPuzzle()
-guessesLeft.textContent = guessedLetterOne.statusMessage()
+hangmanWord.textContent = guessedLetterOne.puzzle
+guessesLeft.textContent = guessedLetterOne.statusMessage
 
 
-window.addEventListener('keypress', function (e, status) {
+window.addEventListener('keypress', function (e) {
 
     const keypress = String.fromCharCode(e.charCode)
     guessedLetterOne.makeGuess(keypress)
-    guessedLetterOne.statusMessage()
-    hangmanWord.textContent = guessedLetterOne.getPuzzle()
-    guessesLeft.textContent = guessedLetterOne.statusMessage()
-    console.log(guessedLetterOne.getPuzzle())
-    console.log(guessedLetterOne.remaningGueses)
+    guessedLetterOne.statusMessage
+    hangmanWord.textContent = guessedLetterOne.puzzle
+    guessesLeft.textContent = guessedLetterOne.statusMessage
 })
 
 
