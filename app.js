@@ -26,50 +26,24 @@ window.addEventListener('keypress', (e) => {
     guessesLeft.textContent = guessedLetterOne.statusMessage
 })
 
-getPuzzle((error, puzzlex)=> {
-    if (error) {
-        console.log(`Error:${error}`)
-    } else {
-        console.log(puzzlex)
-    }
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle)
+}, (error) => {
+    console.log(`error: ${error}`)
 })
+
+
+
 //vi skickar in en ett argument som printar det argumentet som vi passar in
 
 //Making an HTTP request
 /**/
 
-
-
-/*const requestCountries = new XMLHttpRequest()
-const countryCode = 'SE'
-
-
-requestCountries.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status===200) {
-        const countries = JSON.parse(e.target.responseText)
-        const country = countries.findIndex((countryIndex) => {
-            return countryIndex.alpha2Code === countryCode
-
-
-        })
-        console.log(countries[country].name)
-    } else if(e.target.readyState===4) {
-        console.log('Unable to fetch data')
-
-    }
-
-
+getCountry('SE').then((countryName) => {
+    console.log(countryName)
+}, (undefined) => {
+    console.log('You got an error')
 })
-
-
-requestCountries.open('GET', 'http://restcountries.eu/rest/v2/all')
-requestCountries.send()
-
-
-httpRequest.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
-httpRequest.send()
-
-
 
 
 
