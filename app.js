@@ -13,40 +13,113 @@
 
 let hangmanWord = document.querySelector("#puzzleText")
 let guessesLeft = document.querySelector('#guessesLeft')
-const guessedLetterOne = new Hangman('Cat', 2)
-hangmanWord.textContent = guessedLetterOne.puzzle
-guessesLeft.textContent = guessedLetterOne.statusMessage
+let hangmanImage = document.querySelector('#hangyman')
+var img = document.createElement("img");
+img.src = `hangman8.png`
+src = document.querySelector('#hangyman')
+src.appendChild(img)
+
+
+
+
+//*hangmanWord.textContent = guessedLetterOne.puzzle
+//*guessesLeft.textContent = guessedLetterOne.statusMessage
+
 
 
 window.addEventListener('keypress', (e) => {
     const keypress = String.fromCharCode(e.charCode)
     guessedLetterOne.makeGuess(keypress)
     guessedLetterOne.statusMessage
-    hangmanWord.textContent = guessedLetterOne.puzzle
+    let remaining = guessedLetterOne.remaining()
+    console.log(remaining)
+    img.src = `hangman${remaining}.png`
+    render()
+})
+
+const render = () => {
+    hangmanWord.innerHTML = ''
     guessesLeft.textContent = guessedLetterOne.statusMessage
-})
 
-getPuzzle('2').then((puzzle) => {
+    
+    const splitWord = guessedLetterOne.puzzle.split('')
+    splitWord.forEach((letter) =>{
+        let spanCreate = document.createElement('span')
+        spanCreate.textContent = letter
+        hangmanWord.appendChild(spanCreate)
+        guessesLeft.textContent = guessedLetterOne.statusMessage
+    })
+
+}
+
+const startGame = async () => {
+    const puzzle = await getPuzzle('2')
+    guessedLetterOne = new Hangman(puzzle, 8)
+    render()
+}
+
+document.querySelector('#hej').addEventListener('click', startGame)
+
+startGame()
+
+/*getPuzzle('2').then((puzzle) => {
     console.log(puzzle)
-}, (error) => {
-    console.log(`error: ${error}`)
+}).catch((error) => {
+    console.log(`error ${error}`)
+})*/
+
+/*
+getLocation().then((geoLocation) => {
+    return getCountry(geoLocation.country)
+}).then((country) => {
+    console.log(country.name)
+}).catch ((error) => {
+    console.log(`Errorxx`)
 })
 
 
 
-//vi skickar in en ett argument som printar det argumentet som vi passar in
+getCurrentCountry().then((country) => {
+    console.log('lol', country.name)
 
-//Making an HTTP request
-/**/
+}).catch((error) => {
+    'You screwed up!'
 
-getCountry('SE').then((countryName) => {
-    console.log(countryName)
-}, (undefined) => {
-    console.log('You got an error')
 })
+/*
 
+/*fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
+    //med fetch behöver vi itne kolla på status
+    if(response.status === 200) {
+        return response.json()
 
+    } else {
+        throw new Error('Kunde inte fetcha puzzlet')
+    }
 
+}).then((data) => {
+    //passar in "puzzlet/ordet" som argument
+    console.log(data.puzzle)
+
+}).catch((error) =>{
+    console.log(error)
+})*/
+
+/* ________________GET THE FULL COUNTRY WITH NAME_______________________*/
+/*let fullLocation = ''*/
+
+/*---------------------*/
+
+/*
+getLocation().then((location) => {
+    fullLocation += `You are from ${location.city}, ${location.region}, `
+    return getCountry(location.country)
+}).then((country) => {
+    console.log(fullLocation += country.name)
+}).catch((err) => {
+    console.log(`Error: ${err}`)
+})
+*/
 
 
 

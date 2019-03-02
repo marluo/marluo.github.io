@@ -2,11 +2,24 @@
 
 <html>
 <body>
-<p id='puzzleText'></p>
-<p id='guessesLeft'></p>
-    <input type='checkbox'>
-    <script src='requests.js'></script>
-    <script src='hangman.js'></script>
-    <script src='app.js'></script>
+    <head>
+        <title>hangmanJS    </title>
+        <link href="styles.css" rel="stylesheet">
+        <link href='favicon.png' rel="icon">
+    </head>
+    <div>
+        <h1>HANGMAN</h1>
+        <div id="hangyman"></div>
+        <div id='puzzleText' class="puzzle"></div>
+        <p id='guessesLeft'></p>
+        <button id="hej" class="button">Reset</button>
+        <script src='requests.js'></script>
+        <script src='hangman.js'></script>
+        <script src='app.js'></script>
+    </div>
+
+
+
+
 </body>
 </html>
